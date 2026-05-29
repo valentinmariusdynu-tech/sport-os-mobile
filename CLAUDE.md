@@ -1,37 +1,22 @@
-# CLAUDE.md — sport-os-mobile
+﻿# CLAUDE.md — sport-os multirepo
 
-## Purpose
-Expo React Native app for Sport-OS: athlete dashboard, live event feed, real-time telemetry display, and SFR device Bluetooth pairing.
+## Stack v11.0
+- Backend: FastAPI + PostgreSQL + Alembic
+- Mobile: React Native
+- AI: Python (sport-os-ai repo separat)
+- Infra: Docker + Hetzner Cloud (CX22→CX32)
+- Docs: sport-os-docs
 
-## Stack
-- Expo SDK (latest), React Native
-- TypeScript (strict)
-- Expo Router (file-based routing)
-- Zustand (client state), React Query (server state)
-- Jest + React Native Testing Library
+## Convenții cross-repo
+- Branch principal: main
+- Commit format: type(scope): message
+- Tests obligatorii înainte de merge
+- Toate secretele în .env (niciodată în cod)
 
-## Key Directories
-- `src/app/` — Expo Router screens (file = route)
-- `src/components/` — reusable UI components
-- `src/hooks/` — custom hooks
-- `src/stores/` — Zustand atoms
-- `src/services/` — REST API client for sport-os-backend
-- `src/lib/` — constants, types, utils
-
-## Dev Commands
-```bash
-npx expo start
-npx tsc --noEmit
-npm test
-npm run lint
-```
-
-## Conventions
-- File-based routing via Expo Router — add screens by adding files to `src/app/`
-- Server state in React Query; local-only state in Zustand
-- Prefer `StyleSheet.create` over inline styles
-- Use `expo-constants` for env values; never hardcode API URLs
-
-## Related Repos
-- [sport-os-backend](https://github.com/valentinmariusdynu-tech/sport-os-backend) — API consumed by `src/services/`
-- [sfr-firmware](https://github.com/valentinmariusdynu-tech/sfr-firmware) — paired device over BLE
+## Repo-uri
+- sport-os-backend — FastAPI, PostgreSQL, Alembic
+- sport-os-mobile — React Native
+- sport-os-ai — AI layer separat
+- sport-os-infra — Docker Compose, Hetzner
+- sport-os-docs — documentație, ADR-uri
+- sfr-firmware — firmware dispozitive
