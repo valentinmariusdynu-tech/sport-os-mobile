@@ -1,22 +1,37 @@
-# sport-os-mobile — Stack Conventions
+# CLAUDE.md — sport-os-mobile
+
+## Purpose
+Expo React Native app for Sport-OS: athlete dashboard, live event feed, real-time telemetry display, and SFR device Bluetooth pairing.
 
 ## Stack
-- React Native + Expo SDK 51+ (iOS & Android)
-- Web: Expo Router with react-native-web (shared codebase)
-- TypeScript 5 strict mode
-- State: Zustand
-- Navigation: Expo Router (file-based)
+- Expo SDK (latest), React Native
+- TypeScript (strict)
+- Expo Router (file-based routing)
+- Zustand (client state), React Query (server state)
+- Jest + React Native Testing Library
 
-## Code Conventions
-- Prettier for formatting; ESLint (eslint-config-expo)
-- Components: PascalCase; hooks: useCamelCase
-- No default exports except app/ screens
-- Styles via StyleSheet or NativeWind
+## Key Directories
+- `src/app/` — Expo Router screens (file = route)
+- `src/components/` — reusable UI components
+- `src/hooks/` — custom hooks
+- `src/stores/` — Zustand atoms
+- `src/services/` — REST API client for sport-os-backend
+- `src/lib/` — constants, types, utils
 
-## Testing
-- Jest + React Testing Library
-- E2E: Detox (mobile) / Playwright (web)
+## Dev Commands
+```bash
+npx expo start
+npx tsc --noEmit
+npm test
+npm run lint
+```
 
-## Git
-- Conventional commits; squash-merge to main
-- main is always shippable to Expo EAS
+## Conventions
+- File-based routing via Expo Router — add screens by adding files to `src/app/`
+- Server state in React Query; local-only state in Zustand
+- Prefer `StyleSheet.create` over inline styles
+- Use `expo-constants` for env values; never hardcode API URLs
+
+## Related Repos
+- [sport-os-backend](https://github.com/valentinmariusdynu-tech/sport-os-backend) — API consumed by `src/services/`
+- [sfr-firmware](https://github.com/valentinmariusdynu-tech/sfr-firmware) — paired device over BLE
